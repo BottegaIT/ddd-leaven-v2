@@ -33,7 +33,7 @@ import pl.com.bottega.ecommerce.sales.application.api.command.OrderDetailsComman
 import pl.com.bottega.ecommerce.sales.application.api.service.OfferChangedExcpetion;
 import pl.com.bottega.ecommerce.sales.application.api.service.OrderingService;
 import pl.com.bottega.ecommerce.sales.domain.offer.Offer;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderFinder;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderFinder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:/functionalTestsContext.xml")

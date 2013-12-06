@@ -13,14 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.readmodel;
+package pl.com.bottega.ecommerce.sales.readmodel.orders;
 
-import pl.com.bottega.cqrs.query.PaginatedResult;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 
-public interface OrderFinder {
+// TODO more attrs
+public class OrderedProductDto {
+	private AggregateId offerId;
 
-	OrderDto find(AggregateId orderId);
+	public AggregateId getOfferId() {
+		return offerId;
+	}
 
-	PaginatedResult<OrderDto> query(OrderQuery orderQuery);
+	public void setOfferId(AggregateId offerId) {
+		this.offerId = offerId;
+	}
 }

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.readmodel;
+package pl.com.bottega.ecommerce.sales.readmodel.orders;
 
 import java.util.ArrayList;
 import java.util.List;

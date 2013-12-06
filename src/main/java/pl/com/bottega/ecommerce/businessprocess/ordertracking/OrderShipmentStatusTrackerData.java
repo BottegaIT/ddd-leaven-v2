@@ -15,6 +15,9 @@
  */
 package pl.com.bottega.ecommerce.businessprocess.ordertracking;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -28,8 +31,12 @@ public class OrderShipmentStatusTrackerData {
     @GeneratedValue
     private Long id;
 
+    @AttributeOverrides({
+		@AttributeOverride(name = "aggregateId", column = @Column(name = "orderId"))})
     private AggregateId orderId;
 
+    @AttributeOverrides({
+		@AttributeOverride(name = "aggregateId", column = @Column(name = "shipmentId"))})
     private AggregateId shipmentId;
 
     private Boolean shipmentReceived = false;

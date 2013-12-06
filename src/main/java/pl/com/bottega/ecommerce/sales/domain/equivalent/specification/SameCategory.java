@@ -1,3 +1,9 @@
+package pl.com.bottega.ecommerce.sales.domain.equivalent.specification;
+
+import pl.com.bottega.ecommerce.sales.domain.productscatalog.Product;
+import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductType;
+import pl.com.bottega.ecommerce.sharedkernel.specification.CompositeSpecification;
+
 /*
  * Copyright 2011-2014 the original author or authors.
  *
@@ -13,18 +19,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.domain.productscatalog;
+public class SameCategory extends CompositeSpecification<Product>{
 
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
-
-import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
-
-@Repository
-public interface ProductRepository {
-
-	public Product load(AggregateId productId);
+	private ProductType productType;
 	
-	public List<Product> findProductWhereBestBeforeExpiredIn(int days);
+	public SameCategory(ProductType productType) {
+		this.productType = productType;
+	}
+
+	@Override
+	public boolean isSatisfiedBy(Product candidate) {
+		return candidate.getProductType().equals(productType);
+	}
+
 }

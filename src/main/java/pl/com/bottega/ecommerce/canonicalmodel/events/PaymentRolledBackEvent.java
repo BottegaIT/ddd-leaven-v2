@@ -13,18 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.domain.productscatalog;
+package pl.com.bottega.ecommerce.canonicalmodel.events;
 
-import java.util.List;
+import java.io.Serializable;
 
-import org.springframework.stereotype.Repository;
-
+import pl.com.bottega.ddd.annotations.event.Event;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 
-@Repository
-public interface ProductRepository {
+@SuppressWarnings("serial")
+@Event
+public class PaymentRolledBackEvent implements Serializable{
 
-	public Product load(AggregateId productId);
+	private AggregateId paymentId;
 	
-	public List<Product> findProductWhereBestBeforeExpiredIn(int days);
+	public PaymentRolledBackEvent(AggregateId paymentId){
+		this.paymentId = paymentId;
+	}
+	
+	public AggregateId getPaymentId() {
+		return paymentId;
+	}
+
 }

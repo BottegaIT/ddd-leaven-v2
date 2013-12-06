@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sharedkernel;
+package pl.com.bottega.ecommerce.sales.domain.payment;
 
+import pl.com.bottega.ddd.annotations.domain.DomainRepository;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 
-@SuppressWarnings("serial")
-public class DomainOperationException extends RuntimeException{
+@DomainRepository
+public interface PaymentRepository {
 
-	private AggregateId aggregateId;
-
-	public DomainOperationException(AggregateId aggregateId, String message){
-		super(message);
-		this.aggregateId = aggregateId;
-	}
+	public Payment load(AggregateId paymentId);
 	
-	public AggregateId getAggregateId() {
-		return aggregateId;
-	}
+	public void save(Payment payment);
 }

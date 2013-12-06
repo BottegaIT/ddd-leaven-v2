@@ -30,7 +30,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
-import pl.com.bottega.ecommerce.sharedkernel.DomainOperationException;
+import pl.com.bottega.ecommerce.sharedkernel.exceptions.DomainOperationException;
 
 /**
  * @author Slawek

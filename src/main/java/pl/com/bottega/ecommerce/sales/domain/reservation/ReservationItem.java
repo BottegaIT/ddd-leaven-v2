@@ -20,7 +20,7 @@ import javax.persistence.ManyToOne;
 
 import pl.com.bottega.ddd.support.domain.BaseEntity;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.Product;
-import pl.com.bottega.ecommerce.sharedkernel.DomainOperationException;
+import pl.com.bottega.ecommerce.sharedkernel.exceptions.DomainOperationException;
 
 @Entity
 class ReservationItem extends BaseEntity{

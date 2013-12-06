@@ -23,9 +23,9 @@ import pl.com.bottega.ddd.annotations.event.EventListeners;
 import pl.com.bottega.ecommerce.canonicalmodel.events.CustomerStatusChangedEvent;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.sales.application.internal.discounts.DiscountingService;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderDto;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderFinder;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderQuery;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderDto;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderFinder;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderQuery;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
 /**

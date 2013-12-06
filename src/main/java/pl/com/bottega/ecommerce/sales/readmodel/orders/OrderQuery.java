@@ -13,19 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.readmodel;
+package pl.com.bottega.ecommerce.sales.readmodel.orders;
 
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 
-// TODO more attrs
-public class OrderedProductDto {
-	private AggregateId offerId;
+public class OrderQuery {
 
-	public AggregateId getOfferId() {
-		return offerId;
+	private String productName;
+	
+	public OrderQuery(String productName, AggregateId clientId){
+		this.productName = productName;
+		//TODO search by client
 	}
-
-	public void setOfferId(AggregateId offerId) {
-		this.offerId = offerId;
+	
+	public String getProductName() {
+		return productName;
 	}
 }

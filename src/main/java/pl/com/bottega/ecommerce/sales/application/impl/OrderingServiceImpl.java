@@ -31,6 +31,8 @@ import pl.com.bottega.ecommerce.sales.domain.equivalent.SuggestionService;
 import pl.com.bottega.ecommerce.sales.domain.offer.DiscountFactory;
 import pl.com.bottega.ecommerce.sales.domain.offer.DiscountPolicy;
 import pl.com.bottega.ecommerce.sales.domain.offer.Offer;
+import pl.com.bottega.ecommerce.sales.domain.payment.Payment;
+import pl.com.bottega.ecommerce.sales.domain.payment.PaymentRepository;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.Product;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductRepository;
 import pl.com.bottega.ecommerce.sales.domain.purchase.Purchase;
@@ -39,14 +41,14 @@ import pl.com.bottega.ecommerce.sales.domain.purchase.PurchaseRepository;
 import pl.com.bottega.ecommerce.sales.domain.reservation.Reservation;
 import pl.com.bottega.ecommerce.sales.domain.reservation.ReservationFactory;
 import pl.com.bottega.ecommerce.sales.domain.reservation.ReservationRepository;
-import pl.com.bottega.ecommerce.sharedkernel.DomainOperationException;
+import pl.com.bottega.ecommerce.sharedkernel.exceptions.DomainOperationException;
 import pl.com.bottega.ecommerce.system.application.SystemUser;
 
 /**
  * Ordering Use Case steps<br>
  * Notice that application language is different (simpler) than domain language, ex: we don'nt want to exposure domain concepts like Purchase and Reservation to the upper layers, we hide them under the Order term  
  * <br>
- * Technically App Service is just a bunch of procedures, therefore OO principles (ex: CqS) does not apply here  
+ * Technically App Service is just a bunch of procedures, therefore OO principles (ex: CqS, SOLID, GRASP) does not apply here  
  *
  * @author Slawek
  */
@@ -73,6 +75,8 @@ public class OrderingServiceImpl implements OrderingService {
 	
 	@Inject
 	private ProductRepository productRepository;
+	
+	@Inject PaymentRepository paymentRepository;
 
 	@Inject
 	private DiscountFactory discountFactory;
@@ -137,12 +141,16 @@ public class OrderingServiceImpl implements OrderingService {
 		
 		purchaseRepository.save(purchase);//Aggregate must be managed by persistence context before firing events (synchronous listeners may need to load it) 
 		
-		client.charge(purchase.getTotalCost());
+		/*
+		 * Sample model where one aggregate creates another. Client does not manage payment lifecycle, therefore application must manage it. 
+		 */
+		Payment payment = client.charge(purchase.getTotalCost());
 		purchase.confirm();	
 		reservation.close();				
 		
 		reservationRepository.save(reservation);
 		clientRepository.save(client);
+		paymentRepository.save(payment);
 	}
 	
 	private Client loadClient() {

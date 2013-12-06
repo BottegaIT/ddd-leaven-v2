@@ -13,20 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.readmodel;
+package pl.com.bottega.ecommerce.sales.readmodel.orders;
 
-import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
+public enum OrderStatus {
+	NEW, CONFIRMED, PROCESSING_PAYMENT, PAYMENT_ACCEPTED, PAYMENT_REJECTED;
 
-public class OrderQuery {
-
-	private String productName;
-	
-	public OrderQuery(String productName, AggregateId clientId){
-		this.productName = productName;
-		//TODO search by client
-	}
-	
-	public String getProductName() {
-		return productName;
-	}
 }

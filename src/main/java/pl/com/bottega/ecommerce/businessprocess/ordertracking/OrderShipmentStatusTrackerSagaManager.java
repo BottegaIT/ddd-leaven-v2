@@ -22,6 +22,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 
 import pl.com.bottega.ecommerce.canonicalmodel.events.OrderSubmittedEvent;
+import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.shipping.domain.events.OrderShippedEvent;
 import pl.com.bottega.ecommerce.shipping.domain.events.ShipmentDeliveredEvent;
 import pl.com.bottega.ecommerce.system.saga.SagaManager;
@@ -36,26 +37,26 @@ public class OrderShipmentStatusTrackerSagaManager implements
 
     @LoadSaga
     public OrderShipmentStatusTrackerData loadSaga(OrderSubmittedEvent event) {
-        return findByOrderId(event.getOrderId().getId());
+        return findByOrderId(event.getOrderId());
     }
 
     @LoadSaga
     public OrderShipmentStatusTrackerData loadSaga(OrderShippedEvent event) {
-        return findByOrderId(event.getOrderId().getId());
+        return findByOrderId(event.getOrderId());
     }
 
     @LoadSaga
     public OrderShipmentStatusTrackerData loadSaga(ShipmentDeliveredEvent event) {
-        return findByShipmentId(event.getShipmentId().getId());
+        return findByShipmentId(event.getShipmentId());
     }
 
-    private OrderShipmentStatusTrackerData findByOrderId(String orderId) {
+    private OrderShipmentStatusTrackerData findByOrderId(AggregateId orderId) {
         Query query = entityManager.createQuery("from OrderShipmentStatusTrackerData where orderId=:orderId")
                 .setParameter("orderId", orderId);
         return (OrderShipmentStatusTrackerData) query.getSingleResult();
     }
 
-    private OrderShipmentStatusTrackerData findByShipmentId(String shipmentId) {
+    private OrderShipmentStatusTrackerData findByShipmentId(AggregateId shipmentId) {
         Query query = entityManager.createQuery("from OrderShipmentStatusTrackerData where shipmentId=:shipmentId")
                 .setParameter("shipmentId", shipmentId);
         return (OrderShipmentStatusTrackerData) query.getSingleResult();

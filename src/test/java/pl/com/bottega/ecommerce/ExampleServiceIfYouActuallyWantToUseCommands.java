@@ -16,11 +16,11 @@
 package pl.com.bottega.ecommerce;
 
 import java.util.List;
-import java.util.UUID;
 
 import javax.inject.Inject;
 
 import pl.com.bottega.cqrs.command.Gate;
+import pl.com.bottega.ecommerce.sales.application.api.command.AddProdctCommand;
 
 // @ExternalApplicationService
 public class ExampleServiceIfYouActuallyWantToUseCommands {
@@ -28,50 +28,9 @@ public class ExampleServiceIfYouActuallyWantToUseCommands {
 	@Inject
 	private Gate gate;
 
-	@Inject
-	private FinderHelper finderHelper;
-
-	/**
-	 * @return id of the newly created object
-	 */
-	public UUID createSomething(String param1, List<Long> idsOfSomeSort) {
-		UUID id = UUID.randomUUID();
-		CreateSomethingCommand cmd = new CreateSomethingCommand(id, param1, idsOfSomeSort);
+	public void createSomething(String param1, List<Long> idsOfSomeSort) {
+		AddProdctCommand cmd = new AddProdctCommand(null, null, 0);
+		
 		gate.dispatch(cmd);
-		// optionally - create an object with this ID so when the client asks for it it will get it with status CREATING
-		// when the command finishes successfully this object will be overriden by the representation of the actual created object
-		// if the command fails this object will be overriden with status "NOT CREATED" and the error message
-		finderHelper.createObject(id, "Something", "{status: 'Creating'}");
-		return id;
 	}
-}
-
-class CreateSomethingCommand {
-	private UUID somethingId;
-	private String param1;
-	private List<Long> idsOfSomeSort;
-
-	public CreateSomethingCommand(UUID somethingId, String param1, List<Long> idsOfSomeSort) {
-		this.somethingId = somethingId;
-		this.param1 = param1;
-		this.idsOfSomeSort = idsOfSomeSort;
-	}
-	
-	public UUID getSomethingId() {
-		return somethingId;
-	}
-	
-	public String getParam1() {
-		return param1;
-	}
-	
-	public List<Long> getIdsOfSomeSort() {
-		return idsOfSomeSort;
-	}
-}
-
-interface FinderHelper {
-
-	void createObject(UUID id, String type, String value);
-
 }

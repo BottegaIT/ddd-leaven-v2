@@ -25,7 +25,7 @@ import pl.com.bottega.ddd.annotations.domain.DomainFactory;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.sales.domain.client.Client;
 import pl.com.bottega.ecommerce.sales.domain.reservation.Reservation.ReservationStatus;
-import pl.com.bottega.ecommerce.sharedkernel.DomainOperationException;
+import pl.com.bottega.ecommerce.sharedkernel.exceptions.DomainOperationException;
 
 @DomainFactory
 public class ReservationFactory {

@@ -29,11 +29,11 @@ import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.sales.domain.purchase.Purchase;
 import pl.com.bottega.ecommerce.sales.domain.reservation.Reservation;
 import pl.com.bottega.ecommerce.sales.domain.reservation.ReservedProduct;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderDto;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderFinder;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderQuery;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderStatus;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderedProductDto;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderDto;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderFinder;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderQuery;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderStatus;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderedProductDto;
 
 import com.google.common.base.Function;
 

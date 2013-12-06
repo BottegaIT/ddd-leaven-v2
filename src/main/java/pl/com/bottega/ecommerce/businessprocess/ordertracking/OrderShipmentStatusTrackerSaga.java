@@ -18,11 +18,10 @@ package pl.com.bottega.ecommerce.businessprocess.ordertracking;
 import javax.inject.Inject;
 
 import pl.com.bottega.ecommerce.canonicalmodel.events.OrderSubmittedEvent;
-import pl.com.bottega.ecommerce.sales.readmodel.OrderFinder;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderFinder;
 import pl.com.bottega.ecommerce.shipping.domain.events.OrderShippedEvent;
 import pl.com.bottega.ecommerce.shipping.domain.events.ShipmentDeliveredEvent;
 import pl.com.bottega.ecommerce.system.saga.SagaInstance;
-import pl.com.bottega.ecommerce.system.saga.annotations.LoadSaga;
 import pl.com.bottega.ecommerce.system.saga.annotations.Saga;
 import pl.com.bottega.ecommerce.system.saga.annotations.SagaAction;
 

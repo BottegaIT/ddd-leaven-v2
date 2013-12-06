@@ -13,9 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.readmodel;
+package pl.com.bottega.ecommerce.sales.readmodel.orders;
 
-public enum OrderStatus {
-	NEW, CONFIRMED, PROCESSING_PAYMENT, PAYMENT_ACCEPTED, PAYMENT_REJECTED;
+import pl.com.bottega.cqrs.query.PaginatedResult;
+import pl.com.bottega.ddd.annotations.appication.Finder;
+import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 
+@Finder
+public interface OrderFinder {
+
+	OrderDto find(AggregateId orderId);
+
+	PaginatedResult<OrderDto> query(OrderQuery orderQuery);
 }

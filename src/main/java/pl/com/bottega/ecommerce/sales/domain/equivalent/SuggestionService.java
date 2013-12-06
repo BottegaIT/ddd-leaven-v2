@@ -15,12 +15,16 @@
  */
 package pl.com.bottega.ecommerce.sales.domain.equivalent;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import pl.com.bottega.ddd.annotations.domain.DomainService;
 import pl.com.bottega.ecommerce.sales.domain.client.Client;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.Product;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductRepository;
+import pl.com.bottega.ecommerce.sales.readmodel.offer.Offer;
+import pl.com.bottega.ecommerce.sharedkernel.specification.Specification;
 
 /**
  * Sample Decision Support feature: suggests equivalent of the product based on client's habits. 
@@ -34,9 +38,23 @@ public class SuggestionService {
 	@Inject
 	private ProductRepository productRepository;
 	
-	public Product suggestEquivalent(Product product, Client client) {
-		//TODO explore domain logic
-		return productRepository.load(product.getAggregateId());
+	@Inject
+	private Offer offer;
+	
+	@Inject
+	private ProductSpecificationFactory productSpecificationFactory;
+	
+	public Product suggestEquivalent(Product problematicProduct, Client client) {
+		List<Product> expiringProducts = productRepository.findProductWhereBestBeforeExpiredIn(5);
+		
+		Specification<Product> specification = productSpecificationFactory.create(client, problematicProduct);
+		
+		for (Product suggestedProduct : expiringProducts) {
+			if (specification.isSatisfiedBy(suggestedProduct))
+				return suggestedProduct;
+		}
+		
+		return null;
 	}
 
 }

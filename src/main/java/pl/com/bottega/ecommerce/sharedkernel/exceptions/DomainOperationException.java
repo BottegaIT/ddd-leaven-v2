@@ -13,18 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.domain.productscatalog;
-
-import java.util.List;
-
-import org.springframework.stereotype.Repository;
+package pl.com.bottega.ecommerce.sharedkernel.exceptions;
 
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 
-@Repository
-public interface ProductRepository {
+@SuppressWarnings("serial")
+public class DomainOperationException extends RuntimeException{
 
-	public Product load(AggregateId productId);
+	private AggregateId aggregateId;
+
+	public DomainOperationException(AggregateId aggregateId, String message){
+		super(message);
+		this.aggregateId = aggregateId;
+	}
 	
-	public List<Product> findProductWhereBestBeforeExpiredIn(int days);
+	public AggregateId getAggregateId() {
+		return aggregateId;
+	}
 }

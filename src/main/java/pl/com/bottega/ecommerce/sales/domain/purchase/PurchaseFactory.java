@@ -28,8 +28,8 @@ import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.sales.domain.client.Client;
 import pl.com.bottega.ecommerce.sales.domain.offer.Offer;
 import pl.com.bottega.ecommerce.sales.domain.offer.OfferItem;
-import pl.com.bottega.ecommerce.sharedkernel.DomainOperationException;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
+import pl.com.bottega.ecommerce.sharedkernel.exceptions.DomainOperationException;
 
 @DomainFactory
 public class PurchaseFactory {

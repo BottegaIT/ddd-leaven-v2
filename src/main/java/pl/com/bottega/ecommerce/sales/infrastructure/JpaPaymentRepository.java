@@ -15,21 +15,12 @@
  */
 package pl.com.bottega.ecommerce.sales.infrastructure;
 
-import java.util.List;
-
 import pl.com.bottega.ddd.annotations.domain.DomainRepositoryImpl;
 import pl.com.bottega.ddd.support.infrastructure.repository.jpa.GenericJpaRepository;
-import pl.com.bottega.ecommerce.sales.domain.productscatalog.Product;
-import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductRepository;
+import pl.com.bottega.ecommerce.sales.domain.payment.Payment;
+import pl.com.bottega.ecommerce.sales.domain.payment.PaymentRepository;
 
 @DomainRepositoryImpl
-public class JpaProductRepository extends GenericJpaRepository<Product> implements ProductRepository{
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Product> findProductWhereBestBeforeExpiredIn(int days) {
-		//TODO take days into consideration
-		return entityManager.createQuery("FROM Product p").getResultList();
-	}
+public class JpaPaymentRepository extends GenericJpaRepository<Payment> implements PaymentRepository {
 
 }

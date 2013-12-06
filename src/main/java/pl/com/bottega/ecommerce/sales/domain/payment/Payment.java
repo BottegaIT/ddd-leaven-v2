@@ -13,51 +13,51 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.domain.client;
+package pl.com.bottega.ecommerce.sales.domain.payment;
 
 import javax.inject.Inject;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 
 import pl.com.bottega.ddd.annotations.domain.AggregateRoot;
 import pl.com.bottega.ddd.support.domain.BaseAggregateRoot;
+import pl.com.bottega.ecommerce.canonicalmodel.events.PaymentRolledBackEvent;
+import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.ClientData;
-import pl.com.bottega.ecommerce.sales.domain.payment.Payment;
-import pl.com.bottega.ecommerce.sales.domain.payment.PaymentFactory;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 
-@Entity
+/**
+ * 
+ * @author Slawek
+ *
+ */
 @AggregateRoot
-public class Client extends BaseAggregateRoot{
+@Entity
+public class Payment extends BaseAggregateRoot{
 
-	private String name;
+	@Embedded
+	private ClientData clientData;
 	
-	@Inject
+	@Embedded
+	private Money amount;
+	
 	@Transient
+	@Inject
 	private PaymentFactory paymentFactory;
 	
-	public ClientData generateSnapshot(){
-		return new ClientData(aggregateId, name);
+	@SuppressWarnings("unused")
+	private Payment(){}
+	
+	Payment(AggregateId aggregateId, ClientData clientData, Money amount) {
+		this.aggregateId = aggregateId;
+		this.clientData = clientData;
+		this.amount = amount;
 	}
 
-	public boolean canAfford(Money amount) {		
-		return true;//TODO explore domain rules ex: credit limit
-	}
-
-	/**
-	 * Sample model: one aggregate creates another.<br>
-	 * Client model does not compose Payment - therefore it does not manage Payment lifecycle.<br>
-	 * Application layer is responsible for managing Payment lifecycle;
-	 * 
-	 * @param amount
-	 * @return
-	 */
-	public Payment charge(Money amount) {
-		if (! canAfford(amount)){			
-			domainError("Can not afford: " + amount);
-		}
-		// TODO facade to the payment module
-		
-		return paymentFactory.createPayment(generateSnapshot(), amount);
+	public Payment rollBack(){
+		//TODO explore domain rules
+		eventPublisher.publish(new PaymentRolledBackEvent(getAggregateId()));
+		return paymentFactory.createPayment(clientData, amount.multiplyBy(-1));
 	}
 }
