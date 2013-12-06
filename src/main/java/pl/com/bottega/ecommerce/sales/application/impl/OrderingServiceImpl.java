@@ -46,6 +46,8 @@ import pl.com.bottega.ecommerce.system.application.SystemUser;
 
 /**
  * Ordering Use Case steps<br>
+ * Each step is a Domain Story<br>
+ * <br>
  * Notice that application language is different (simpler) than domain language, ex: we don'nt want to exposure domain concepts like Purchase and Reservation to the upper layers, we hide them under the Order term  
  * <br>
  * Technically App Service is just a bunch of procedures, therefore OO principles (ex: CqS, SOLID, GRASP) does not apply here  
@@ -91,6 +93,16 @@ public class OrderingServiceImpl implements OrderingService {
 		return reservation.getAggregateId();
 	}
 
+	/**
+	 * DOMAIN STORY<br>
+	 * try to read this as a full sentence, this way: subject.predicate(completion)<br>
+	 * <br>
+	 * Load reservation by orderId<br>
+	 * Load product by productId<br>
+	 * Check if product is not available<br>
+	 * -if so, than suggest equivalent for that product based on client<br>
+	 * Reservation add product by given quantity
+	 */
 	@Override
 	public void addProduct(AggregateId orderId, AggregateId productId,
 			int quantity) {
@@ -109,16 +121,34 @@ public class OrderingServiceImpl implements OrderingService {
 	}
 	
 	/**
-	 * Can be invoked many times for the same order (with different params).
+	 * Can be invoked many times for the same order (with different params).<br>
+	 * Offer VO is not stored in the Repo, it is stored on the Client Tier instead.
 	 */
 	public Offer calculateOffer(AggregateId orderId) {
 		Reservation reservation = reservationRepository.load(orderId);
 
 		DiscountPolicy discountPolicy = discountFactory.create(loadClient());
 		
+		/*
+		 * Sample pattern: Aggregate generates Value Object using function<br>
+		 * Higher order function is closured by policy
+		 */
 		return reservation.calculateOffer(discountPolicy);
 	}
 
+	/**
+	 * DOMAIN STORY<br>
+	 * try to read this as a full sentence, this way: subject.predicate(completion)<br>
+	 * <br>
+	 * Load reservation by orderId<br>
+	 * Check if reservation is closed - if so, than Error<br>
+	 * Generate new offer from reservation using discount created per client<br>
+	 * Check if new offer is not the same as seen offer using delta = 5<br>
+	 * Create purchase per client based on seen offer<br>
+	 * Check if client can not afford total cost of purchase - if so, than Error<br>
+	 * Confirm purchase<br>
+	 * Close reservation<br>
+	 */
 	@Override
 	@Transactional(isolation = Isolation.SERIALIZABLE)//highest isolation needed because of manipulating many Aggregates
 	public void confirm(AggregateId orderId, OrderDetailsCommand orderDetailsCommand, Offer seenOffer)
@@ -127,9 +157,17 @@ public class OrderingServiceImpl implements OrderingService {
 		if (reservation.isClosed())
 			throw new DomainOperationException(reservation.getAggregateId(), "reservation is already closed");
 		
+		/*
+		 * Sample pattern: Aggregate generates Value Object using function<br>
+		 * Higher order function is closured by policy
+		 */
 		Offer newOffer = reservation.calculateOffer(
 									discountFactory.create(loadClient()));
 		
+		/*
+		 * Sample pattern: Client Tier sends back old VOs, Server generates new VOs based on Aggregate state<br>
+		 * Notice that this VO is not stored in Repo, it's stored on the Client Tier. 
+		 */
 		if (! newOffer.sameAs(seenOffer, 5))//TODO load delta from conf.
 			throw new OfferChangedExcpetion(reservation.getAggregateId(), seenOffer, newOffer);
 		
@@ -145,12 +183,14 @@ public class OrderingServiceImpl implements OrderingService {
 		 * Sample model where one aggregate creates another. Client does not manage payment lifecycle, therefore application must manage it. 
 		 */
 		Payment payment = client.charge(purchase.getTotalCost());
+		paymentRepository.save(payment);
+		
 		purchase.confirm();	
 		reservation.close();				
 		
 		reservationRepository.save(reservation);
 		clientRepository.save(client);
-		paymentRepository.save(payment);
+		
 	}
 	
 	private Client loadClient() {
