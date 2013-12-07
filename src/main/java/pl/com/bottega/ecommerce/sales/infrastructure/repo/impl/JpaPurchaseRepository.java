@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.infrastructure;
+package pl.com.bottega.ecommerce.sales.infrastructure.repo.impl;
 
 import pl.com.bottega.ddd.annotations.domain.DomainRepositoryImpl;
 import pl.com.bottega.ddd.support.infrastructure.repository.jpa.GenericJpaRepository;
-import pl.com.bottega.ecommerce.sales.domain.reservation.Reservation;
-import pl.com.bottega.ecommerce.sales.domain.reservation.ReservationRepository;
+import pl.com.bottega.ecommerce.sales.domain.purchase.Purchase;
+import pl.com.bottega.ecommerce.sales.domain.purchase.PurchaseRepository;
 
 @DomainRepositoryImpl
-public class JpaReservationRepository extends GenericJpaRepository<Reservation> implements ReservationRepository {
+public class JpaPurchaseRepository extends GenericJpaRepository<Purchase> implements PurchaseRepository {
 
-	
 
 }

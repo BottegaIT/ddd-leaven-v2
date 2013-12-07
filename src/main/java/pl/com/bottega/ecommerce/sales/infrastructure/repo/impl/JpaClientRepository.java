@@ -13,23 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package pl.com.bottega.ecommerce.sales.infrastructure;
-
-import java.util.List;
+package pl.com.bottega.ecommerce.sales.infrastructure.repo.impl;
 
 import pl.com.bottega.ddd.annotations.domain.DomainRepositoryImpl;
 import pl.com.bottega.ddd.support.infrastructure.repository.jpa.GenericJpaRepository;
-import pl.com.bottega.ecommerce.sales.domain.productscatalog.Product;
-import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductRepository;
+import pl.com.bottega.ecommerce.sales.domain.client.Client;
+import pl.com.bottega.ecommerce.sales.domain.client.ClientRepository;
 
 @DomainRepositoryImpl
-public class JpaProductRepository extends GenericJpaRepository<Product> implements ProductRepository{
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Product> findProductWhereBestBeforeExpiredIn(int days) {
-		//TODO take days into consideration
-		return entityManager.createQuery("FROM Product p").getResultList();
-	}
+public class JpaClientRepository extends GenericJpaRepository<Client> implements ClientRepository{
 
 }

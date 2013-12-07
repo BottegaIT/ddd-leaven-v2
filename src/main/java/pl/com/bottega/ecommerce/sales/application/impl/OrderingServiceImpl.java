@@ -78,7 +78,8 @@ public class OrderingServiceImpl implements OrderingService {
 	@Inject
 	private ProductRepository productRepository;
 	
-	@Inject PaymentRepository paymentRepository;
+	@Inject 
+	private PaymentRepository paymentRepository;
 
 	@Inject
 	private DiscountFactory discountFactory;
