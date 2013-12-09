@@ -172,7 +172,7 @@ public class OrderingServiceImpl implements OrderingService {
 		if (! newOffer.sameAs(seenOffer, 5))//TODO load delta from conf.
 			throw new OfferChangedExcpetion(reservation.getAggregateId(), seenOffer, newOffer);
 		
-		Client client = loadClient();					
+		Client client = loadClient();//create per logged client, not reservation owner					
 		Purchase purchase = purchaseFactory.create(reservation.getAggregateId(), client, seenOffer);
 				
 		if (! client.canAfford(purchase.getTotalCost()))

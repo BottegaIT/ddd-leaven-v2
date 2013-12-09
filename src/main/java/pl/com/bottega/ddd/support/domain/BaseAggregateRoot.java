@@ -19,6 +19,9 @@
 package pl.com.bottega.ddd.support.domain;
 
 import javax.inject.Inject;
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -37,7 +40,7 @@ import pl.com.bottega.ecommerce.sharedkernel.exceptions.DomainOperationException
  * 
  */
 @Component
-@Scope("prototype")
+@Scope("prototype")//created in domain factories, not in spring container, therefore we don't want eager creation
 @MappedSuperclass
 public abstract class BaseAggregateRoot {
 	public static enum AggregateStatus {
@@ -45,8 +48,8 @@ public abstract class BaseAggregateRoot {
 	}
 
 	@EmbeddedId
-	//@AttributeOverrides({
-	//	  @AttributeOverride(name = "idValue", column = @Column(name = "aggregateId", nullable = false))})
+	@AttributeOverrides({
+		  @AttributeOverride(name = "idValue", column = @Column(name = "aggregateId", nullable = false))})
 	protected AggregateId aggregateId;
 
 	@Version
