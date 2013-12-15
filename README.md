@@ -18,7 +18,7 @@ Primary goals of this project are the following:
 
 ##What is Leaven idea?
 
-Our intention is to provide a leaven ([leavening agent](http://en.wikipedia.org/wiki/Leavening_agent)) - something that you use to make a bread - a good one. 
+Our intention is to provide a leaven ([leavening agent](http://en.wikipedia.org/wiki/Leavening_agent)) - something that you use to make bread - a good one. 
 
 
 ##You are the Architect!
