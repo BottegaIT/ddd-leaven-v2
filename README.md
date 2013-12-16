@@ -3,8 +3,10 @@ ddd-leaven-v2
 
 DDD-CqRS sample v2.0 project that helps you with starting out advanced domain modeling using Spring, JPA and testing.
 
-Wiki is still under construction, bout you can use this "map" to navigate through code: http://prezi.com/akrfq7jyau8w/ddd-cqrs-leaven-v20/
+Wiki is still under construction, bout you can use this "map" to navigate through the code: http://prezi.com/akrfq7jyau8w/ddd-cqrs-leaven-v20/
 
+Group: https://groups.google.com/forum/#!forum/ddd-cqrs-sample
+Blog: http://ddd-cqrs-leaven.blogspot.com/
 
 
 ##Another DDD and CqRS Sample?
