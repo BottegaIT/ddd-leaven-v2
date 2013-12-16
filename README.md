@@ -6,6 +6,7 @@ DDD-CqRS sample v2.0 project that helps you with starting out advanced domain mo
 Wiki is still under construction, bout you can use this "map" to navigate through the code: http://prezi.com/akrfq7jyau8w/ddd-cqrs-leaven-v20/
 
 Group: https://groups.google.com/forum/#!forum/ddd-cqrs-sample
+
 Blog: http://ddd-cqrs-leaven.blogspot.com/
 
 
