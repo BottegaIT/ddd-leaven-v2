@@ -16,7 +16,7 @@
 package pl.com.bottega.ecommerce.sales.readmodel.orders;
 
 import pl.com.bottega.cqrs.query.PaginatedResult;
-import pl.com.bottega.ddd.annotations.appication.Finder;
+import pl.com.bottega.ddd.annotations.application.Finder;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 
 @Finder

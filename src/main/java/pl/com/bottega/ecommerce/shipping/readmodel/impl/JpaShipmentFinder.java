@@ -21,7 +21,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import pl.com.bottega.ddd.annotations.appication.Finder;
+import pl.com.bottega.ddd.annotations.application.Finder;
 import pl.com.bottega.ecommerce.shipping.readmodel.ShipmentDto;
 import pl.com.bottega.ecommerce.shipping.readmodel.ShipmentFinder;
 

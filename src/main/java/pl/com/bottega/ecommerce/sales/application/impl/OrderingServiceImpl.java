@@ -20,7 +20,7 @@ import javax.inject.Inject;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.com.bottega.ddd.annotations.appication.ApplicationService;
+import pl.com.bottega.ddd.annotations.application.ApplicationService;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.sales.application.api.command.OrderDetailsCommand;
 import pl.com.bottega.ecommerce.sales.application.api.service.OfferChangedExcpetion;

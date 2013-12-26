@@ -15,7 +15,7 @@
  */
 package pl.com.bottega.ecommerce.sales.application.internal.discounts;
 
-import pl.com.bottega.ddd.annotations.appication.InternalApplicationService;
+import pl.com.bottega.ddd.annotations.application.InternalApplicationService;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
 import pl.com.bottega.ecommerce.sharedkernel.Money;
 

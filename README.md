@@ -3,8 +3,11 @@ ddd-leaven-v2
 
 DDD-CqRS sample v2.0 project that helps you with starting out advanced domain modeling using Spring, JPA and testing.
 
-Wiki is still under construction, bout you can use this "map" to navigate through code: http://prezi.com/akrfq7jyau8w/ddd-cqrs-leaven-v20/
+Wiki is still under construction, bout you can use this "map" to navigate through the code: http://prezi.com/akrfq7jyau8w/ddd-cqrs-leaven-v20/
 
+Group: https://groups.google.com/forum/#!forum/ddd-cqrs-sample
+
+Blog: http://ddd-cqrs-leaven.blogspot.com/
 
 
 ##Another DDD and CqRS Sample?
@@ -18,7 +21,7 @@ Primary goals of this project are the following:
 
 ##What is Leaven idea?
 
-Our intention is to provide a leaven ([leavening agent](http://en.wikipedia.org/wiki/Leavening_agent)) - something that you use to make a bread - a good one. 
+Our intention is to provide a leaven ([leavening agent](http://en.wikipedia.org/wiki/Leavening_agent)) - something that you use to make bread - a good one. 
 
 
 ##You are the Architect!
