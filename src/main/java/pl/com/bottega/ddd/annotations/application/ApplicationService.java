@@ -21,11 +21,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @Retention(RetentionPolicy.RUNTIME)
-@Transactional
+@Transactional(propagation = Propagation.REQUIRED)
 @Target(ElementType.TYPE)
 public @interface ApplicationService {
 

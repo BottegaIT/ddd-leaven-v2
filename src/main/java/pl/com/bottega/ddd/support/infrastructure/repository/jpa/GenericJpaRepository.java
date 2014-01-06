@@ -23,6 +23,8 @@ import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import pl.com.bottega.ddd.support.domain.BaseAggregateRoot;
 import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
@@ -46,6 +48,7 @@ public abstract class GenericJpaRepository<A extends BaseAggregateRoot> {
         this.clazz = ((Class<A>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0]);
     }
 
+    @Transactional(propagation = Propagation.SUPPORTS)
     public A load(AggregateId id) {
     	//lock to be sure when creating other objects based on values of this aggregate
         A aggregate = entityManager.find(clazz, id, LockModeType.OPTIMISTIC);
