@@ -15,22 +15,64 @@
  */
 package pl.com.bottega.ecommerce;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import pl.com.bottega.cqrs.command.Gate;
-import pl.com.bottega.ecommerce.sales.application.api.command.AddProdctCommand;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.annotation.DirtiesContext.ClassMode;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-// @ExternalApplicationService
+import pl.com.bottega.cqrs.command.Gate;
+import pl.com.bottega.ecommerce.canonicalmodel.publishedlanguage.AggregateId;
+import pl.com.bottega.ecommerce.sales.acceptancetests.AuthenticationTestHelper;
+import pl.com.bottega.ecommerce.sales.application.api.command.AddProdctCommand;
+import pl.com.bottega.ecommerce.sales.application.api.command.OrderDetailsCommand;
+import pl.com.bottega.ecommerce.sales.application.api.service.OrderingService;
+import pl.com.bottega.ecommerce.sales.domain.offer.Offer;
+import pl.com.bottega.ecommerce.sales.readmodel.orders.OrderFinder;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:/functionalTestsContext.xml")
+@DirtiesContext(classMode = ClassMode.AFTER_EACH_TEST_METHOD)
+@ActiveProfiles("test")
 public class ExampleServiceIfYouActuallyWantToUseCommands {
 
 	@Inject
 	private Gate gate;
+	
+	@Inject
+	OrderingService orderingService;
 
-	public void createSomething(String param1, List<Long> idsOfSomeSort) {
-		AddProdctCommand cmd = new AddProdctCommand(null, null, 0);
+	@Inject
+	OrderFinder orderFinder;
+
+	@Inject
+	AuthenticationTestHelper authenticationHelper;
+
+	@Before
+	public void givenImAuthenticated() throws Exception {
+		authenticationHelper.asBuyer();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		authenticationHelper.deauthenticate();
+	}
+	
+	@Test
+	public void shouldPurchaseProducts(){
+		AggregateId orderId = orderingService.createOrder();
 		
+		AddProdctCommand cmd = new AddProdctCommand(orderId, new AggregateId("p1"), 1);		
 		gate.dispatch(cmd);
+		
+		Offer offer = orderingService.calculateOffer(orderId);
+		
+		orderingService.confirm(orderId, new OrderDetailsCommand(), offer);
 	}
 }
