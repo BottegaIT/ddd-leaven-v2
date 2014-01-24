@@ -27,7 +27,8 @@
 			</plugins>
 		</pluginManagement>
 		<plugins>
-			<!-- run maven build with license:format goals to add license notice to the files that are missing it -->
+			<!-- run maven build with license:format goals to add license notice to 
+				the files that are missing it -->
 			<plugin>
 				<groupId>com.mycila.maven-license-plugin</groupId>
 				<artifactId>maven-license-plugin</artifactId>
@@ -62,6 +63,16 @@
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
 			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -123,17 +134,12 @@
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.kubek2k</groupId>
-			<artifactId>springockito-annotations</artifactId>
-			<version>1.0.8</version>
-			<scope>test</scope>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.kubek2k</groupId> <artifactId>springockito-annotations</artifactId> 
+			<version>1.0.8</version> <scope>test</scope> </dependency> -->
 		<dependency>
 			<groupId>org.easytesting</groupId>
 			<artifactId>fest-assert-core</artifactId>
 			<version>2.0M10</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
