@@ -27,7 +27,7 @@ import pl.com.bottega.ecommerce.sales.domain.productscatalog.Product;
 import pl.com.bottega.ecommerce.sales.domain.productscatalog.ProductRepository;
 import pl.com.bottega.ecommerce.sales.domain.reservation.Reservation;
 import pl.com.bottega.ecommerce.sales.domain.reservation.ReservationRepository;
-import pl.com.bottega.ecommerce.system.application.SystemUser;
+import pl.com.bottega.ecommerce.system.application.SystemContext;
 
 @CommandHandlerAnnotation
 public class AddProdctCommandHandler implements CommandHandler<AddProdctCommand, Void>{
@@ -45,7 +45,7 @@ public class AddProdctCommandHandler implements CommandHandler<AddProdctCommand,
 	private ClientRepository clientRepository;
 	
 	@Inject
-	private SystemUser systemUser;
+	private SystemContext systemContext;
 	
 	@Override
 	public Void handle(AddProdctCommand command) {
@@ -66,7 +66,7 @@ public class AddProdctCommandHandler implements CommandHandler<AddProdctCommand,
 	}
 	
 	private Client loadClient() {
-		return clientRepository.load(systemUser.getDomainUserId());
+		return clientRepository.load(systemContext.getSystemUser().getClientId());
 	}
 
 }

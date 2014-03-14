@@ -42,7 +42,7 @@ import pl.com.bottega.ecommerce.sales.domain.reservation.Reservation;
 import pl.com.bottega.ecommerce.sales.domain.reservation.ReservationFactory;
 import pl.com.bottega.ecommerce.sales.domain.reservation.ReservationRepository;
 import pl.com.bottega.ecommerce.sharedkernel.exceptions.DomainOperationException;
-import pl.com.bottega.ecommerce.system.application.SystemUser;
+import pl.com.bottega.ecommerce.system.application.SystemContext;
 
 /**
  * Ordering Use Case steps<br>
@@ -58,7 +58,7 @@ import pl.com.bottega.ecommerce.system.application.SystemUser;
 public class OrderingServiceImpl implements OrderingService {
 
 	@Inject
-	private SystemUser systemUser;
+	private SystemContext systemContext;
 	
 	@Inject
 	private ClientRepository clientRepository;
@@ -195,6 +195,6 @@ public class OrderingServiceImpl implements OrderingService {
 	}
 	
 	private Client loadClient() {
-		return clientRepository.load(systemUser.getDomainUserId());
+		return clientRepository.load(systemContext.getSystemUser().getClientId());
 	}
 }

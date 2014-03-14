@@ -20,14 +20,14 @@ import javax.inject.Inject;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
-import pl.com.bottega.ecommerce.system.application.SystemUser;
+import pl.com.bottega.ecommerce.system.application.SystemContext;
 
 @Component
 @Profile("test")
 public class AuthenticationTestHelper {
 
 	@Inject
-	private SystemUser systemUser;
+	private SystemContext systemContext;
 
 	public void asBuyer() {
 		
