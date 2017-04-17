@@ -10,7 +10,7 @@ Group: https://groups.google.com/forum/#!forum/ddd-cqrs-sample
 Blog: http://ddd-cqrs-leaven.blogspot.com/
 
 
-##Another DDD and CqRS Sample?
+## Another DDD and CqRS Sample?
 
 Primary goals of this project are the following: 
 * presenting sample implementation of all DDD Building Blocks and techniques - no technical compromises, real world problems and solutions 
@@ -19,12 +19,12 @@ Primary goals of this project are the following:
 * presenting ready ready to use and easy to adopt tools and best practices 
 
 
-##What is Leaven idea?
+## What is Leaven idea?
 
 Our intention is to provide a leaven ([leavening agent](http://en.wikipedia.org/wiki/Leavening_agent)) - something that you use to make bread - a good one. 
 
 
-##You are the Architect!
+## You are the Architect!
 
 So you take our leaven, understand it deeply and modify to fit your context. 
 
