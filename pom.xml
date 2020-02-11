@@ -146,7 +146,7 @@
 	<repositories>
 		<repository>
 			<id>org.springframework.maven.milestone</id>
-			<url>http://maven.springframework.org/milestone </url>
+			<url>https://maven.springframework.org/milestone </url>
 		</repository>
 	</repositories>
 </project>
